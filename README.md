@@ -1,7 +1,7 @@
 # Download Subtitles
 Download subtitles from opensubtitles.org by right click on the video file.
 
-example: goto images folder to see the full example.
+example:
 
 
 ![](images/download_subs.gif)
