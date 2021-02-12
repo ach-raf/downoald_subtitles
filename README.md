@@ -1,9 +1,10 @@
 # Download Subtitles
 Download subtitles from opensubtitles.org by right click on the video file.
 
-example: in images folder.
+example:
 
-![Example](images/example.png)
+
+![](images/download_subs.gif)
 
 
 A little python script to donwload subtitles from opensubtitles.org.
