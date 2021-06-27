@@ -11,7 +11,7 @@ from xmlrpc.client import ServerProxy
 # ==== OpenSubtitles.org server settings =======================================
 # XML-RPC server domain for opensubtitles.org:
 osd_server = ServerProxy('https://api.opensubtitles.org/xml-rpc')
-osd_username = 'download_subs'
+osd_username = 'gojeta'
 osd_password = '123123'
 osd_language = 'en'
 
@@ -19,7 +19,7 @@ osd_language = 'en'
 # 1/ Change the search language by using any supported 3-letter (ISO639-2) language code:
 #    > Supported language codes: https://www.opensubtitles.org/addons/export_languages.php
 #    > Ex: opt_languages = ['eng','fre', 'ara']
-opt_languages = ['eng', 'ara', 'fre']
+opt_languages = ['eng']
 # Force downloading and storing UTF-8 encoded subtitles files.
 opt_force_utf8 = True
 # ==== Search settings =========================================================
@@ -131,7 +131,7 @@ def establish_connection():
 ExitCode = 2
 
 # ==== File and language lists
-videoPathList = sys.argv[1:]  # get the video or vies from the args sent by the bash script
+videoPathList = sys.argv[1:]  # get the video or videos from the args sent by the bash script
 languageList = []
 
 current_language = ""
@@ -228,8 +228,8 @@ try:
                     sub_lang_name = subtitles_result_list['data'][sub_index]['LanguageName']
 
                     # Use the path of the input video
-                    sub_path = current_video_path.rsplit('.', 1)[0] + f' - {current_language}.' + \
-                               subtitles_result_list['data'][sub_index]['SubFormat']
+                    sub_path = current_video_path.rsplit('.', 1)[
+                                   0] + f".{subtitles_result_list['data'][sub_index]['SubFormat']}"
 
                     # Make sure we are downloading an UTF8 encoded file
                     if opt_force_utf8:
