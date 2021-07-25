@@ -11,8 +11,8 @@ from xmlrpc.client import ServerProxy
 # ==== OpenSubtitles.org server settings =======================================
 # XML-RPC server domain for opensubtitles.org:
 osd_server = ServerProxy('https://api.opensubtitles.org/xml-rpc')
-osd_username = 'gojeta'
-osd_password = '123123'
+osd_username = ''
+osd_password = ''
 osd_language = 'en'
 
 
