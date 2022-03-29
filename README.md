@@ -7,7 +7,7 @@ example:
 ![](images/download_subs.gif)
 
 
-A little python script to donwload subtitles from opensubtitles.org.
+A little python script to download subtitles from opensubtitles.org.
 
 # Usage:
 
