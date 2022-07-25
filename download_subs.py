@@ -47,7 +47,7 @@ OSD_SERVER = CONFIG_INFO["osd_server"]
 OSD_SERVER = ServerProxy(OSD_SERVER)
 
 OSD_USERNAME = CONFIG_INFO["osd_username"]
-OSD_PASSWORD = CONFIG_INFO["osd_password"]
+OSD_PASSWORD = CONFIG_INFO["osd_password"].replace('"', "")
 OSD_LANGUAGE = CONFIG_INFO["osd_language"]
 OPT_FORCE_UTF8 = CONFIG_INFO["opt_force_utf8"]
 
