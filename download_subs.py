@@ -14,6 +14,7 @@ import urllib.request
 import configparser
 
 from xmlrpc.client import ServerProxy
+from utils.clean_subtitles import clean_ads
 
 
 def read_info_file(file_path):
@@ -37,7 +38,7 @@ def read_info_file(file_path):
 
 # ================================ Paths =============================
 CURRENT_DIR_PATH = os.path.dirname(os.path.realpath(__file__))
-INFO_FILE_PATH = os.path.join(CURRENT_DIR_PATH, "info.ini")
+INFO_FILE_PATH = os.path.join(CURRENT_DIR_PATH, "utils", "info.ini")
 # ====================================================================
 
 # =============== Reading from info.ini ==============================
@@ -164,21 +165,21 @@ def establish_connection():
             OSD_USERNAME,
             hashlib.md5(OSD_PASSWORD[0:32].encode("utf-8")).hexdigest(),
             OSD_LANGUAGE,
-            "opensubtitles-download 4.2",
+            "opensubtitles-download 5.1",
         )
     except Exception:
         # Retry once after a delay (could just be a momentary overloaded server?)
         time.sleep(3)
         try:
             return OSD_SERVER.LogIn(
-                OSD_USERNAME, OSD_PASSWORD, OSD_LANGUAGE, "opensubtitles-download 4.2"
+                OSD_USERNAME, OSD_PASSWORD, OSD_LANGUAGE, "opensubtitles-download 5.1"
             )
         except Exception:
             print("Couldn't connect to OpenSubtitles")
             sys.exit(2)
 
 
-def main(opt_languages):
+def main(subtitle_languages):
     # ==============================================================================
     # ==== Main program (execution starts here) ====================================
     # ==============================================================================
@@ -200,8 +201,8 @@ def main(opt_languages):
     # ==== Search and download subtitles ===========================================
     session = establish_connection()
     # ==== Count languages selected for this search
-    for language in opt_languages:
-        language_list += list(language.split(","))
+    for _language in subtitle_languages:
+        language_list += list(_language.split(","))
 
     language_count_results = 0
     try:
@@ -213,7 +214,7 @@ def main(opt_languages):
             video_file_name = os.path.basename(current_video_path)
 
             # ==== Search for available subtitles
-            for current_language in opt_languages:
+            for current_language in subtitle_languages:
                 subtitles_search_list = []
                 subtitles_result_list = {}
 
@@ -353,6 +354,8 @@ def main(opt_languages):
                 print("No subtitles found")
                 exit_code = 1
             else:
+                #
+                clean_ads(sub_path)
                 exit_code = 0
 
     except KeyboardInterrupt:
